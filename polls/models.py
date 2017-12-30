@@ -31,7 +31,7 @@ class Choice(models.Model):
 # Create your models here.
 
 @python_2_unicode_compatible
-class locales(models.Model):
+class Locales(models.Model):
   
     nombre = models.CharField(max_length=300,blank=True)
 
@@ -41,7 +41,7 @@ class locales(models.Model):
 
 
 @python_2_unicode_compatible
-class plataforma(models.Model):
+class Plataforma(models.Model):
   
     nombre = models.CharField(max_length=300,blank=True)
 
@@ -50,18 +50,18 @@ class plataforma(models.Model):
         return self.nombre
 
 @python_2_unicode_compatible
-class localPlataforma(models.Model):
+class LocalPlataforma(models.Model):
   
-    nomlocal = models.CharField(max_length=300,blank=True)
-    nomplat = models.CharField(max_length=300,blank=True)
+    local = models.ForeignKey(Locales,related_name='localplataforma',max_length=300,blank=True,null=True)
+    plataforma = models.ForeignKey(Plataforma,max_length=300,blank=True,null=True)
 
 
     def __str__(self):
 
-        return self.nomplat
+        return str(self.local.nombre)+'-'+str(self.plataforma.nombre)
 
 @python_2_unicode_compatible
-class estado(models.Model):
+class Estado(models.Model):
   
     tipo = models.CharField(max_length=300,blank=True)
 
@@ -71,7 +71,7 @@ class estado(models.Model):
 
 
 @python_2_unicode_compatible
-class tiposicion(models.Model):
+class Tiposicion(models.Model):
   
     tp = models.CharField(max_length=300,blank=True)
 
@@ -82,7 +82,7 @@ class tiposicion(models.Model):
 
 
 @python_2_unicode_compatible
-class personal(models.Model):
+class Personal(models.Model):
 
     nombre = models.CharField(max_length=300,blank=True)
    
@@ -92,7 +92,7 @@ class personal(models.Model):
 
 
 @python_2_unicode_compatible
-class interprete(models.Model):
+class Interprete(models.Model):
 
     nombre = models.CharField(max_length=300,null=True,blank=True)
     apellido = models.CharField(max_length=300,blank=True)
@@ -102,25 +102,25 @@ class interprete(models.Model):
          return self.nombre
 
 @python_2_unicode_compatible
-class posicion(models.Model):
+class Posicion(models.Model):
   
-    idlp = models.ForeignKey(localPlataforma,max_length=300,blank=True)
-    tipo = models.ForeignKey(tiposicion,max_length=300,blank=True)
-    estadoper= models.ForeignKey(personal,max_length=300,blank=True)
-    idInter= models.ForeignKey(interprete,max_length=300,blank=True)
-    estado= models.ForeignKey(estado,max_length=300,blank=True)
+    localplataforma = models.ForeignKey(LocalPlataforma,max_length=300,blank=True,null=True)
+    tipo = models.ForeignKey(Tiposicion,max_length=300,blank=True,null=True)
+    estado_personal= models.ForeignKey(Personal,max_length=300,blank=True,null=True)
+    interprete= models.ForeignKey(Interprete,max_length=300,blank=True,null=True)
+    estado_maquina= models.ForeignKey(Estado,max_length=300,blank=True,null=True)
     
     def __str__(self):
-        return self.idlp
+        return self.localplataforma.local.nombre
 
 
 @python_2_unicode_compatible
-class suplp(models.Model):
+class Suplp(models.Model):
   
-    idlop = models.ForeignKey(localPlataforma,max_length=300,blank=True)
+    localplataforma = models.ForeignKey(LocalPlataforma,max_length=300,blank=True,null=True)
     nombre = models.CharField(max_length=300,blank=True)
-    idloc = models.ForeignKey(locales,max_length=300,blank=True)
-    idpl= models.ForeignKey(plataforma,max_length=300,blank=True)
+    idloc = models.ForeignKey(Locales,max_length=300,blank=True)
+    idpl= models.ForeignKey(Plataforma,max_length=300,blank=True)
     def __str__(self):
         return self.idlop
 

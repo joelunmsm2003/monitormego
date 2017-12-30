@@ -16,51 +16,51 @@ from django.utils.translation import ugettext_lazy
 admin.site.register(Question)
 
 
-@admin.register(locales)
+@admin.register(Locales)
 class localesAdmin(admin.ModelAdmin):
 
 	list_display = ('nombre',)
 
-@admin.register(plataforma)
+@admin.register(Plataforma)
 class plataformaAdmin(admin.ModelAdmin):
 
 	list_display = ('nombre',)
 
-@admin.register(localPlataforma)
+@admin.register(LocalPlataforma)
 class localPlataformaAdmin(admin.ModelAdmin):
 
-	list_display = ('nomlocal','nomplat')
+	list_display = ('id',)
 
-@admin.register(estado)
+@admin.register(Estado)
 class estadoAdmin(admin.ModelAdmin):
 
 	list_display = ('tipo',)
 
-@admin.register(posicion)
+@admin.register(Posicion)
 class posicionAdmin(admin.ModelAdmin):
 
 
-	list_display = ('idlp','tipo','estadoper','idInter','estado' )
+	list_display = ('localplataforma',)
 
 
-@admin.register(tiposicion)
+@admin.register(Tiposicion)
 class tiposicionAdmin(admin.ModelAdmin):
 
 
 	list_display = ('tp', )
 
-@admin.register(interprete)
+@admin.register(Interprete)
 class interpreteAdmin(admin.ModelAdmin):
 	list_display = ('nombre','apellido','dni')
 
 
-@admin.register(personal)
+@admin.register(Personal)
 class personalAdmin(admin.ModelAdmin):
 	list_display = ('nombre',)
 	
-@admin.register(suplp)
+@admin.register(Suplp)
 class suplpAdmin(admin.ModelAdmin):
-	list_display = ('nombre','idlop','nombre','idloc','idpl')
+	list_display = ('nombre','localplataforma','nombre','idloc','idpl')
 
 
 
