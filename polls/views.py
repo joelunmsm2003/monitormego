@@ -169,13 +169,10 @@ from polls.serializer import *
 def posiciones(request):
 
 
-	obj = Locales.objects.get(id=3)
-
-	print repr(LocalSerializer())
-	serializer = LocalSerializer(instance=obj)
-
-	print serializer
 
 
 
 	return HttpResponse(serializer.data, content_type="application/json")
+
+
+

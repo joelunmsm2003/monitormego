@@ -38,6 +38,9 @@ class Locales(models.Model):
     def __str__(self):
 
         return self.nombre
+    class Meta:
+        managed = True
+        verbose_name = 'Locale'
 
 
 @python_2_unicode_compatible
@@ -52,7 +55,7 @@ class Plataforma(models.Model):
 @python_2_unicode_compatible
 class LocalPlataforma(models.Model):
   
-    local = models.ForeignKey(Locales,related_name='localplataforma',max_length=300,blank=True,null=True)
+    local = models.ForeignKey(Locales,related_name='LocalPlataforma',max_length=300,blank=True,null=True)
     plataforma = models.ForeignKey(Plataforma,max_length=300,blank=True,null=True)
 
 
@@ -60,10 +63,20 @@ class LocalPlataforma(models.Model):
 
         return str(self.local.nombre)+'-'+str(self.plataforma.nombre)
 
+    class Meta:
+        managed = True
+        verbose_name = 'Local Plataforma'
+
 @python_2_unicode_compatible
 class Estado(models.Model):
   
     tipo = models.CharField(max_length=300,blank=True)
+
+
+    class Meta:
+        managed = True
+        verbose_name = 'Estado'
+
 
     def __str__(self):
 
@@ -74,6 +87,10 @@ class Estado(models.Model):
 class Tiposicion(models.Model):
   
     tp = models.CharField(max_length=300,blank=True)
+
+    class Meta:
+        managed = True
+        verbose_name = 'Tipo de Posicion'
 
     def __str__(self):
         return self.tp
@@ -123,6 +140,10 @@ class Suplp(models.Model):
     idpl= models.ForeignKey(Plataforma,max_length=300,blank=True)
     def __str__(self):
         return self.idlop
+
+    class Meta:
+        managed = True
+        verbose_name = 'Supervisor Plataforma'
 
 
 

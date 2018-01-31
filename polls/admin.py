@@ -13,7 +13,9 @@ from django.contrib.admin.filters import RelatedOnlyFieldListFilter
 from django.contrib.admin import AdminSite
 from django.utils.translation import ugettext_lazy
 
-admin.site.register(Question)
+# admin.site.register(Question)
+
+admin.site.site_header = 'Monitoreo Interprete'
 
 
 @admin.register(Locales)
@@ -29,7 +31,9 @@ class plataformaAdmin(admin.ModelAdmin):
 @admin.register(LocalPlataforma)
 class localPlataformaAdmin(admin.ModelAdmin):
 
-	list_display = ('id',)
+	list_display = ('id','local','plataforma')
+
+
 
 @admin.register(Estado)
 class estadoAdmin(admin.ModelAdmin):
@@ -40,7 +44,7 @@ class estadoAdmin(admin.ModelAdmin):
 class posicionAdmin(admin.ModelAdmin):
 
 
-	list_display = ('localplataforma',)
+	list_display = ('localplataforma','tipo','interprete','estado_maquina','estado_personal')
 
 
 @admin.register(Tiposicion)
