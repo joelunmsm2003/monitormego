@@ -42,6 +42,19 @@ class Locales(models.Model):
         managed = True
         verbose_name = 'Locale'
 
+@python_2_unicode_compatible
+class Nivel(models.Model):
+  
+    nombre = models.CharField(max_length=300,blank=True)
+
+    def __str__(self):
+
+        return self.nombre
+    class Meta:
+        managed = True
+        verbose_name = 'Nivel'
+
+
 
 @python_2_unicode_compatible
 class Plataforma(models.Model):
@@ -96,13 +109,28 @@ class Tiposicion(models.Model):
         return self.tp
 
 
+@python_2_unicode_compatible
+class Color(models.Model):
+
+    nombre = models.CharField('Color',max_length=300,blank=True)
+   
+    class Meta:
+        managed = True
+        verbose_name = 'Color'
+
+    def __str__(self):
+        return self.nombre 
 
 
 @python_2_unicode_compatible
 class Personal(models.Model):
 
-    nombre = models.CharField(max_length=300,blank=True)
+    nombre = models.CharField('Estado Interprete',max_length=300,blank=True)
+    color = models.ForeignKey(Color,max_length=300,blank=True,null=True)
    
+    class Meta:
+        managed = True
+        verbose_name = 'Estado de Cubiculo'
 
     def __str__(self):
         return self.nombre 
@@ -112,8 +140,12 @@ class Personal(models.Model):
 class Interprete(models.Model):
 
     nombre = models.CharField(max_length=300,null=True,blank=True)
-    apellido = models.CharField(max_length=300,blank=True)
-    dni = models.CharField(max_length=300,blank=True)
+    apellido = models.CharField(max_length=300,blank=True,null=True)
+    dni = models.CharField(max_length=300,blank=True,null=True)
+    iden = models.CharField('ID',max_length=300,null=True,blank=True)
+    local = models.ForeignKey(Locales,max_length=300,blank=True,null=True)
+    nivel = models.ForeignKey(Nivel,max_length=300,blank=True,null=True)
+
     def __str__(self):
 
          return self.nombre
@@ -126,6 +158,11 @@ class Posicion(models.Model):
     estado_personal= models.ForeignKey(Personal,max_length=300,blank=True,null=True)
     interprete= models.ForeignKey(Interprete,max_length=300,blank=True,null=True)
     estado_maquina= models.ForeignKey(Estado,max_length=300,blank=True,null=True)
+    nombre = models.CharField(max_length=300,blank=True)
+
+    class Meta:
+        managed = True
+        verbose_name = 'Cubiculo'
     
     def __str__(self):
         return self.localplataforma.local.nombre

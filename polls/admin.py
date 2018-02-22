@@ -18,20 +18,27 @@ from django.utils.translation import ugettext_lazy
 admin.site.site_header = 'Monitoreo Interprete'
 
 
+@admin.register(Nivel)
+class localesAdmin(admin.ModelAdmin):
+
+	list_display = ('id','nombre',)
+
+
 @admin.register(Locales)
 class localesAdmin(admin.ModelAdmin):
 
-	list_display = ('nombre',)
+	list_display = ('id','nombre',)
 
 @admin.register(Plataforma)
 class plataformaAdmin(admin.ModelAdmin):
 
-	list_display = ('nombre',)
+	list_display = ('id','nombre',)
 
 @admin.register(LocalPlataforma)
 class localPlataformaAdmin(admin.ModelAdmin):
 
 	list_display = ('id','local','plataforma')
+	list_filter = ('local__nombre',)
 
 
 
@@ -44,7 +51,8 @@ class estadoAdmin(admin.ModelAdmin):
 class posicionAdmin(admin.ModelAdmin):
 
 
-	list_display = ('localplataforma','tipo','interprete','estado_maquina','estado_personal')
+	list_display = ('nombre','localplataforma','tipo','interprete','estado_maquina','estado_personal')
+	list_filter = ('localplataforma',)
 
 
 @admin.register(Tiposicion)
@@ -55,7 +63,11 @@ class tiposicionAdmin(admin.ModelAdmin):
 
 @admin.register(Interprete)
 class interpreteAdmin(admin.ModelAdmin):
-	list_display = ('nombre','apellido','dni')
+	list_display = ('nombre','apellido','dni','iden','sede')
+	list_filter=('local__nombre',)
+
+	def sede(self, obj):
+		return obj.local.nombre
 
 
 @admin.register(Personal)
