@@ -5,7 +5,7 @@
     width: auto;
     height: 40px;
     padding: 10px 40px;
-    background: #f3cd45 !important;
+    background: #7c89f5 !important;
     line-height: 40px;
     color: #2d2d0c !important;
     overflow: hidden;
@@ -17,10 +17,10 @@
 </style>
 {% extends "admin/base.html" %}
 
-{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+{% block title %}{{ title }} | {{ site_title|default:_('Capital site admin') }}{% endblock %}
 
 {% block branding %}
-<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Capital administration') }}</a></h1>
 {% endblock %}
 
 {% block nav-global %}{% endblock %}

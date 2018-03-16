@@ -66,10 +66,26 @@ class Plataforma(models.Model):
         return self.nombre
 
 @python_2_unicode_compatible
+class Supervisor(models.Model):
+
+    user = models.ForeignKey(User,max_length=300,blank=True,null=True)
+    nombre = models.CharField(max_length=300,null=True,blank=True)
+    apellido = models.CharField(max_length=300,blank=True,null=True)
+    dni = models.CharField(max_length=300,blank=True,null=True)
+    iden = models.CharField('ID',max_length=300,null=True,blank=True)
+
+
+    def __str__(self):
+
+         return self.nombre
+
+
+@python_2_unicode_compatible
 class LocalPlataforma(models.Model):
   
     local = models.ForeignKey(Locales,related_name='LocalPlataforma',max_length=300,blank=True,null=True)
     plataforma = models.ForeignKey(Plataforma,max_length=300,blank=True,null=True)
+    supervisor = models.ForeignKey(Supervisor,max_length=300,blank=True,null=True)
 
 
     def __str__(self):
@@ -150,6 +166,9 @@ class Interprete(models.Model):
 
          return self.nombre
 
+
+
+
 @python_2_unicode_compatible
 class Posicion(models.Model):
   
@@ -171,12 +190,11 @@ class Posicion(models.Model):
 @python_2_unicode_compatible
 class Suplp(models.Model):
   
+    supervisor = models.ForeignKey(Supervisor,max_length=300,blank=True,null=True)
     localplataforma = models.ForeignKey(LocalPlataforma,max_length=300,blank=True,null=True)
-    nombre = models.CharField(max_length=300,blank=True)
-    idloc = models.ForeignKey(Locales,max_length=300,blank=True)
-    idpl= models.ForeignKey(Plataforma,max_length=300,blank=True)
+
     def __str__(self):
-        return self.idlop
+        return self.supervisor
 
     class Meta:
         managed = True
